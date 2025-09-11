@@ -6,7 +6,7 @@
     <title>To-Do List</title>
 </head>
 <body>
-    <h2>To-Do List</h2>
+    <h2 style="color: red;">To-Do List</h2>
     <input type="text" id="taskInput" placeholder="Enter the new task" autofocus/>
     <button onclick="addTaskup()">Add To Top</button>
     <button onclick="addTaskdown()">Add To Bottom</button>
@@ -16,21 +16,57 @@
     <script>
         let tasks = [];
 
-        // render all the task
+        // render all the tasks
         function renderTasks() {
             const taskList = document.getElementById('taskList');
             taskList.innerHTML = '';
             tasks.forEach((task, index) => {
                 const li = document.createElement('li');
-                li.textContent = task;
+
+                // Create span to show task text
+                const taskSpan = document.createElement('span');
+                taskSpan.textContent = task;
+
+                // Create Edit button
+                const editBtn = document.createElement('button');
+                editBtn.textContent = 'Edit';
+                editBtn.onclick = () => editTask(index, taskSpan, li);
+
+                // Create Remove button
                 const removeBtn = document.createElement('button');
                 removeBtn.textContent = 'Remove';
-                
                 removeBtn.onclick = () => removeTask(index);
-                li.appendChild(removeBtn);
-                taskList.appendChild(li);
 
+                li.appendChild(taskSpan);
+                li.appendChild(editBtn);
+                li.appendChild(removeBtn);
+
+                taskList.appendChild(li);
             });
+        }
+
+        // edit task
+        function editTask(index, taskSpan, li) {
+            // Create input with current value
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = tasks[index];
+
+            // Create Save button
+            const saveBtn = document.createElement('button');
+            saveBtn.textContent = 'Save';
+            saveBtn.onclick = () => {
+                const newTask = input.value.trim();
+                if (newTask) {
+                    tasks[index] = newTask;
+                    renderTasks();
+                }
+            };
+
+            // Clear li and add input and save button
+            li.innerHTML = '';
+            li.appendChild(input);
+            li.appendChild(saveBtn);
         }
 
         // add to top
@@ -38,7 +74,7 @@
             const taskInput = document.getElementById('taskInput');
             const task = taskInput.value.trim();
             if (task) {
-                tasks.unshift(task); 
+                tasks.unshift(task);
                 taskInput.value = '';
                 renderTasks();
             }
@@ -49,7 +85,7 @@
             const taskInput = document.getElementById('taskInput');
             const task = taskInput.value.trim();
             if (task) {
-                tasks.push(task); 
+                tasks.push(task);
                 taskInput.value = '';
                 renderTasks();
             }
@@ -61,9 +97,9 @@
             renderTasks();
         }
     </script>
-    
 </body>
 </html>
 
 
-<!-- version 2 -->
+
+<!-- version 3 -->
