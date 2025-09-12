@@ -1,0 +1,20 @@
+*{
+    font-size: 20px;
+}
+
+input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+}
+
+h1{
+    color: red;
+    font-size: 50px !important;
+}
+
+label {
+    font-size: 30px;
+}
+
+
+
+

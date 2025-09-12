@@ -1,69 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .ed{
+            background-color: green;
+            color: white;
+        }
+        .rem{
+            background-color: red;
+            color: white;
+
+        }
+    </style>
 </head>
+
 <body>
-    <h2>To-Do List</h2>
-    <input type="text" id="taskInput" placeholder="Enter the new task" autofocus/>
-    <button onclick="addTaskup()">Add To Top</button>
-    <button onclick="addTaskdown()">Add To Bottom</button>
-  
-    <ul id="taskList"></ul>
-
-    <script>
-        let tasks = [];
-
-        // render all the task
-        function renderTasks() {
-            const taskList = document.getElementById('taskList');
-            taskList.innerHTML = '';
-            tasks.forEach((task, index) => {
-                const li = document.createElement('li');
-                li.textContent = task;
-                const removeBtn = document.createElement('button');
-                removeBtn.textContent = 'Remove';
-                
-                removeBtn.onclick = () => removeTask(index);
-                li.appendChild(removeBtn);
-                taskList.appendChild(li);
-
-            });
-        }
-
-        // add to top
-        function addTaskup() {
-            const taskInput = document.getElementById('taskInput');
-            const task = taskInput.value.trim();
-            if (task) {
-                tasks.unshift(task); 
-                taskInput.value = '';
-                renderTasks();
-            }
-        }
-
-        // add to bottom
-        function addTaskdown() {
-            const taskInput = document.getElementById('taskInput');
-            const task = taskInput.value.trim();
-            if (task) {
-                tasks.push(task); 
-                taskInput.value = '';
-                renderTasks();
-            }
-        }
-
-        // remove task
-        function removeTask(index) {
-            tasks.splice(index, 1);
-            renderTasks();
-        }
-    </script>
+    <h1>To-Do List</h1>
+    <div class="d-flex container gap-5">
+        <input type="text" class="form-control" id="taskInput" placeholder="Enter the new task" autofocus />
+        <button class="btn btn-primary" onclick="addTaskup()">Add To Top</button>
+        <button class="btn btn-warning" onclick="addTaskdown()">Add To Bottom</button>
     
+    </div>
+    <div class="container">
+        <div id="taskList"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./script.js"></script>
 </body>
+
 </html>
-
-
-<!-- version 2 -->
