@@ -1,61 +1,67 @@
-
-// Store tasks as objects with text and checked properties
+// store tasks as objects with text and checked properties
 let tasks = [];
 
 function renderTasks() {
-    const taskList = document.getElementById('taskList');
+    let taskList = document.getElementById('taskList');
     taskList.innerHTML = '';
     tasks.forEach((task, index) => {
-        const taskDiv = document.createElement('div');
+        let taskDiv = document.createElement('div');
 
-        const checkbox = document.createElement('input');
+        let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = 'taskid' + index;
         checkbox.checked = task.checked;
+        // checkbox.classList = 'form-check-input'
 
-        // Update the checked state in tasks when checkbox changes
-        checkbox.addEventListener('change', () => {
+
+
+
+        // if the checkbox is checked then only the css will apply
+        checkbox.addEventListener('input', () => {
             task.checked = checkbox.checked;
+            
         });
 
-        const label = document.createElement('label');
+        let label = document.createElement('label');
         label.htmlFor = checkbox.id;
         label.textContent = task.text;
-
-        const editBtn = document.createElement('button');
+        
+        let editBtn = document.createElement('button');
         editBtn.textContent = 'Edit';
         editBtn.onclick = () => editTask(index);
-        editBtn.classList = 'ed'
-
-        const removeBtn = document.createElement('button');
+        editBtn.classList = 'btn btn-warning ';
+        
+        
+        let removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
         removeBtn.onclick = () => removeTask(index);
-        removeBtn.classList = 'rem'
+        removeBtn.classList = 'btn btn-danger'
+        // removeBtn.classList = "i"
 
         taskDiv.appendChild(checkbox);
         taskDiv.appendChild(label);
         taskDiv.appendChild(editBtn);
         taskDiv.appendChild(removeBtn);
-
         taskList.appendChild(taskDiv);
     });
 }
 
 function editTask(index) {
-    const task = tasks[index];
-    const taskList = document.getElementById('taskList');
-    const taskDivs = taskList.children;
-    const taskDiv = taskDivs[index];
+    let task = tasks[index];
+    let taskList = document.getElementById('taskList');
+    let taskDivs = taskList.children;
+    let taskDiv = taskDivs[index];
     taskDiv.innerHTML = '';
 
-    const input = document.createElement('input');
+    let input = document.createElement('input');
     input.type = 'text';
     input.value = task.text;
 
-    const saveBtn = document.createElement('button');
+    let saveBtn = document.createElement('button');
     saveBtn.textContent = 'Save';
+    saveBtn.classList = 'btn btn-warning'
     saveBtn.onclick = () => {
-        const newTask = input.value.trim();
+        let newTask = input.value.trim();
         if (newTask) {
             task.text = newTask;
             renderTasks();
@@ -66,9 +72,17 @@ function editTask(index) {
     taskDiv.appendChild(saveBtn);
 }
 
+
+
+
+function removeTask(index) {
+    tasks.splice(index, 1);
+    renderTasks();
+}
+
 function addTaskup() {
-    const taskInput = document.getElementById('taskInput');
-    const text = taskInput.value.trim();
+    let taskInput = document.getElementById('taskInput');
+    let text = taskInput.value.trim();
     if (text) {
         tasks.unshift({ text, checked: false });
         taskInput.value = '';
@@ -77,16 +91,11 @@ function addTaskup() {
 }
 
 function addTaskdown() {
-    const taskInput = document.getElementById('taskInput');
-    const text = taskInput.value.trim();
+    let taskInput = document.getElementById('taskInput');
+    let text = taskInput.value.trim();
     if (text) {
         tasks.push({ text, checked: false });
         taskInput.value = '';
         renderTasks();
     }
-}
-
-function removeTask(index) {
-    tasks.splice(index, 1);
-    renderTasks();
 }

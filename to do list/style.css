@@ -1,9 +1,11 @@
 *{
     font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 input[type="checkbox"]:checked + label {
     text-decoration: line-through;
+    font-style: italic;
 }
 
 h1{
@@ -15,6 +17,10 @@ label {
     font-size: 30px;
 }
 
+
+body {
+    background-color: aquamarine;
+}
 
 
 

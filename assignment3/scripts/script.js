@@ -53,9 +53,12 @@ taskForm.addEventListener('submit', (event) => {
 })
 
 searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim()
+    const query = searchInput.value
     if (query === "") {
         displayTask()
+        
+
+
     } else {
         const regex = new RegExp(query, "i")
         const filteredTasks = tasks.filter(task => regex.test(task.title))
